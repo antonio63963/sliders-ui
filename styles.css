@@ -39,6 +39,7 @@ main {
   align-items: center;
   margin: 20px;
 }
+
 .chatNameRow {
   display: flex;
   justify-content: space-between;
@@ -76,7 +77,7 @@ main {
   margin: 10px 0 10px 0;
   display: flex
 }
-input[value="ssd"] {
+input[value="ssd"], input[value="single"] {
   margin-left: 20px;
 }
 label {

@@ -67,9 +67,20 @@
             <div class="ChartName">
               <span>bunny</span>
               <div class="chatNameOptions bunnyOptions">
-                <input type="radio" name="diskGroup" value="hdd" id="hddChoice" checked />
+                <input
+                  type="radio"
+                  name="diskGroup"
+                  value="hdd"
+                  id="hddChoice"
+                  checked
+                />
                 <label for="hddChoice">HDD</label>
-                <input type="radio" name="diskGroup" value="ssd" id="ssdChoice"/>
+                <input
+                  type="radio"
+                  name="diskGroup"
+                  value="ssd"
+                  id="ssdChoice"
+                />
                 <label for="ssdChoice">SSD</label>
               </div>
             </div>
@@ -86,9 +97,45 @@
               <div class="maxPaymentChart">
                 <span class="maxPaymentText"></span>
               </div>
-              
             </div>
             <span class="bunnyPrice">0$</span>
+          </div>
+        </div>
+
+        <!-- scaleway -->
+        <div class="chatContainer">
+          <div class="chatNameRow">
+            <div class="ChartName">
+              <span>scaleway</span>
+              <div class="chatNameOptions scalewayOptions">
+                <input
+                  type="radio"
+                  name="scalewayOptions"
+                  value="multi"
+                  id="multiChoice"
+                  checked
+                />
+                <label for="multiChoice">Multi</label>
+                <input
+                  type="radio"
+                  name="scalewayOptions"
+                  value="single"
+                  id="singleChoice"
+                />
+                <label for="singleChoice">Single</label>
+              </div>
+            </div>
+            <div class="chatIconWrapper">
+              <img
+                class="imgIcon"
+                src="https://avatars.githubusercontent.com/u/5185491?s=200&v=4"
+                alt="bunny.net"
+              />
+            </div>
+          </div>
+          <div class="graphChartWrapper">
+            <div class="graphChart scalewayChart"></div>
+            <span class="scalewayPrice">0$</span>
           </div>
         </div>
       </section>
