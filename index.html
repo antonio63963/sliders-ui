@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link href="./styles.css" rel="stylesheet" />
+    <title>Sliders</title>
+  </head>
+  <body>
+    <main>
+      <div class="slidecontainer">
+        <h3>Storage: <span id="storageValue">0</span> GB</h3>
+        <input
+          type="range"
+          min="0"
+          max="1000"
+          value="0"
+          id="sliderStorage"
+          id="myRange"
+        />
+        <div class="sliderRange">
+          <span>0</span>
+          <span>1000</span>
+        </div>
+      </div>
+
+      <!-- Transfer slider  -->
+      <div class="slidecontainer">
+        <h3>Transfer: <span id="transferValue">0</span> GB</h3>
+        <input
+          type="range"
+          min="0"
+          max="1000"
+          value="0"
+          id="sliderTransfer"
+          id="myRange"
+        />
+        <div class="sliderRange">
+          <span>0</span>
+          <span>1000</span>
+        </div>
+      </div>
+
+      <section class="chatsSection">
+        <div class="chatContainer">
+          <div class="chatNameRow">
+            <span>backblaze</span>
+            <div class="chatIconWrapper">
+              <img src="./assets/backblaze.svg" />
+            </div>
+          </div>
+          <div class="graphChartWrapper">
+            <div class="graphChart backblazeChart"></div>
+            <span class="blazeTotalPrice">0$</span>
+          </div>
+        </div>
+        <!-- bunny -->
+        <div class="chatContainer">
+          <div class="chatNameRow">
+            <div class="ChartName">
+              <span>bunny</span>
+              <div class="chatNameOptions bunnyOptions">
+                <input type="radio" name="diskGroup" value="hdd" id="hddChoice" checked />
+                <label for="hddChoice">HDD</label>
+                <input type="radio" name="diskGroup" value="ssd" id="ssdChoice"/>
+                <label for="ssdChoice">SSD</label>
+              </div>
+            </div>
+            <div class="chatIconWrapper">
+              <img
+                class="imgIcon"
+                src="https://cdn-1.webcatalog.io/catalog/bunnycdn/bunnycdn-icon-filled-256.webp?v=1675597038159"
+                alt="bunny.net"
+              />
+            </div>
+          </div>
+          <div class="graphChartWrapper">
+            <div class="graphChart bunnyChart">
+              <div class="maxPaymentChart">
+                <span class="maxPaymentText"></span>
+              </div>
+              
+            </div>
+            <span class="bunnyPrice">0$</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="./index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,109 @@
+:root {
+  --bgColor: #040c18;
+  --orangeColor: #ff4820;
+  --purpleColor: #7E57C2;
+  --textColor: rgb(241, 241, 241);
+  --blueTextColor: #81afdd;
+  --grayDark: #757575;
+  --maxWidth: 1200px;
+
+  --chartHeight: 30px;
+
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+}
+main {
+  padding: 20px;
+}
+.slidecontainer {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+.sliderRange {
+  display: flex;
+  justify-content: space-between;
+  color: rgb(128, 128, 128);
+  font-size: 12px;
+}
+
+.chatSection {
+}
+.chatContainer {
+  display: flex;
+  align-items: center;
+  margin: 20px;
+}
+.chatNameRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 200px;
+}
+.chatIconWrapper {
+  display: flex;
+  align-items: center;
+  width: var(--chartHeight);
+  margin: 0 10px 0 10px;
+}
+.graphChartWrapper {
+  display: flex;
+  align-items: center;
+}
+.graphChart {
+  margin-right: 10px;
+  display: flex;
+  background-color: var(--grayDark);
+  height: var(--chartHeight);
+  min-width: 5px;
+  transition: all .5s ease;
+}
+.badPrice {
+  color: red;
+}
+.blazeTotalPrice {
+  display: flex;
+}
+.imgIcon {
+  max-width: 30px;
+}
+.chatNameOptions {
+  margin: 10px 0 10px 0;
+  display: flex
+}
+input[value="ssd"] {
+  margin-left: 20px;
+}
+label {
+  font-size: 10px;
+  margin-left: 8px;
+  color: var(--grayDark);
+}
+.bunnyChart {
+  background-color: red;
+  font-size: 10px;
+}
+.maxPaymentChart {
+  background-color: var(--grayDark);
+  height: 100%;
+  width: 100%;
+  max-width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.maxPaymentText {
+  opacity: 0;
+  color: white;
+  margin-right: 0;
+  transition: opacity .5s ease 0.2s;
+}
+.visibleElement {
+  opacity: 1;
+  margin-right: 10px;
+}
