@@ -3,13 +3,12 @@ const backblaze = {
   storagePrice: 0.005,
   transferPrice: 0.01,
   totalPrice: 0,
-  get getTotalPrice() {
+  calculateTotalPrice: function (storageValue, transferValue) {
     this.totalPrice =
       storageValue * this.storagePrice + transferValue * this.transferPrice;
-    return this.totalPrice;
   },
   get compareTotalPriceWithMin() {
-    return this.totalPrice < this.minPayment ? 7 : this.totalPrice;
+    return this.totalPrice < this.minPayment ? this.minPayment : this.totalPrice;
   },
 };
 
@@ -21,15 +20,13 @@ const bunny = {
     ssd: 0.02,
   },
   transferDiscPrice: 0.01,
-  totalPriceSsd: 0,
-  totalPriceHdd: 0,
-  getTotalPrice: function () {
-    this.totalPriceSsd =
-      storageValue * this.storageDiskPrice.ssd +
-      transferValue * this.transferDiscPrice;
-    this.totalPriceHdd =
-      storageValue * this.storageDiskPrice.hdd +
-      transferValue * this.transferDiscPrice;
+  totalPrice: 0,
+  calculateTotalPrice: function (storageValue, transferValue) {
+    this.totalPrice = this.isHdd
+      ? storageValue * this.storageDiskPrice.hdd +
+        transferValue * this.transferDiscPrice
+      : storageValue * this.storageDiskPrice.ssd +
+        transferValue * this.transferDiscPrice;
   },
 };
 
@@ -41,20 +38,26 @@ const scaleway = {
     priceMulti: 0.06,
     priceSingle: 0.03,
     get multi() {
-      return storageValue <= this.freeGB ? 0 : (storageValue - this.freeGB) * this.priceMulti;
+      return storageValue <= this.freeGB
+        ? 0
+        : (storageValue - this.freeGB) * this.priceMulti;
     },
     get single() {
-      return storageValue <= this.freeGB ? 0 : (storageValue - this.freeGB) * this.priceSingle;
+      return storageValue <= this.freeGB
+        ? 0
+        : (storageValue - this.freeGB) * this.priceSingle;
     },
   },
   transferOption: {
     freeGB: 75,
     price: 0.02,
     get total() {
-      return transferValue <= this.freeGB ? 0 : (transferValue - this.freeGB) * this.price;
+      return transferValue <= this.freeGB
+        ? 0
+        : (transferValue - this.freeGB) * this.price;
     },
   },
-  getTotalPrice: function() {
+  calculateTotalPrice: function () {
     this.totalPrice = this.isMulti
       ? this.storageOption.multi + this.transferOption.total
       : this.storageOption.single + this.transferOption.total;
@@ -66,7 +69,8 @@ const vultr = {
   storagePrice: 0.01,
   transferPrice: 0.01,
   totalPrice: 0,
-  getTotalPrice: function(storageValue, transferValue) {
-    this.totalPrice = storageValue * this.storagePrice + transferValue * this.transferPrice;
-  }
+  calculateTotalPrice: function (storageValue, transferValue) {
+    this.totalPrice =
+      storageValue * this.storagePrice + transferValue * this.transferPrice;
+  },
 };
