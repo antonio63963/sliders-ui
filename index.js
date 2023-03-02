@@ -16,9 +16,20 @@ const scalewayChartElem = document.querySelector('.scalewayChart');
 const scalewayTotalPriceElem = document.querySelector('.scalewayPrice');
 const scalewayOptionsElem = document.querySelector('.scalewayOptions');
 
+const vultrChart = document.querySelector('.vultrChart');
+const vultrTotalPriceElem = document.querySelector('.vultrTotalPrice');
+console.log(vultrChart);
 let storageValue = 0;
 let transferValue = 0;
 const delta = 10; // it affects on maxPayment graph in style max-width: 100px!!!
+
+function setChartWidth(chat, price, delta) {
+  console.log(price, chat.style.width)
+  chat.style.width = `${price * delta}px`;
+};
+function totalPriceContent(chatPrice, price) {
+  chatPrice.textContent = `${price.toFixed(2)}$`;
+};
 
 function onBackblazeChange() {
   backblazeChart.style.width = `${backblaze.getTotalPrice * delta}px`;
@@ -56,7 +67,12 @@ function onScalewayChange() {
 
 };
 
-console.log(scalewayChartElem)
+function onVultr() {
+  vultr.getTotalPrice(storageValue, transferValue);
+  setChartWidth(vultrChart, vultr.totalPrice, delta);
+  totalPriceContent(vultrTotalPriceElem, vultr.totalPrice);
+}
+console.log(vultr)
 // handlers
 function onStorageSlider(e) {
   let sliderValue = e.target.value;
@@ -65,7 +81,8 @@ function onStorageSlider(e) {
 
   onBackblazeChange();
   onBunnyChange();
-  onScalewayChange()
+  onScalewayChange();
+  onVultr();
 };
 
 function onTransferSlider(e) {
@@ -75,7 +92,8 @@ function onTransferSlider(e) {
 
   onBackblazeChange();
   onBunnyChange();
-  onScalewayChange()
+  onScalewayChange();
+  onVultr();
 };
 
 sliderStorage.addEventListener("input", onStorageSlider);

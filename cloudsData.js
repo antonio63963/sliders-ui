@@ -41,7 +41,6 @@ const scaleway = {
     priceMulti: 0.06,
     priceSingle: 0.03,
     get multi() {
-      console.log((storageValue - this.freeGB) * this.priceMulti)
       return storageValue <= this.freeGB ? 0 : (storageValue - this.freeGB) * this.priceMulti;
     },
     get single() {
@@ -56,9 +55,18 @@ const scaleway = {
     },
   },
   getTotalPrice: function() {
-    console.log('wow', this.storageOption.multi)
     this.totalPrice = this.isMulti
       ? this.storageOption.multi + this.transferOption.total
       : this.storageOption.single + this.transferOption.total;
   },
+};
+
+const vultr = {
+  minPayment: 5,
+  storagePrice: 0.01,
+  transferPrice: 0.01,
+  totalPrice: 0,
+  getTotalPrice: function(storageValue, transferValue) {
+    this.totalPrice = storageValue * this.storagePrice + transferValue * this.transferPrice;
+  }
 };
