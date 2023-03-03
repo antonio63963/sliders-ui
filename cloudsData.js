@@ -1,23 +1,28 @@
 const backblaze = {
-  name: 'backblaze',
+  name: "backblaze",
   totalPrice: 0,
+  isPriceTheBest: false,
+  originalColor: "#b61818",
+  usageColor: function(baseColor) {
+    return this.isPriceTheBest ? this.originalColor : baseColor;
+  },
   minPayment: 7,
   storagePrice: 0.005,
   transferPrice: 0.01,
   calculateTotalPrice: function (storageValue, transferValue) {
-    this.totalPrice =
-      storageValue * this.storagePrice + transferValue * this.transferPrice;
-  },
-  get compareTotalPriceWithMin() {
-    return this.totalPrice < this.minPayment
-      ? this.minPayment
-      : this.totalPrice;
+   const sum = storageValue * this.storagePrice + transferValue * this.transferPrice;
+    this.totalPrice = sum < this.minPayment && (storageValue > 0 || transferValue > 0) ? this.minPayment : sum;
   },
 };
 
 const bunny = {
-  name: 'bunny',
+  name: "bunny",
   totalPrice: 0,
+  isPriceTheBest: false,
+  originalColor: "#ff4820",
+  usageColor: function(baseColor) {
+    return this.isPriceTheBest ? this.originalColor : baseColor;
+  },
   isHdd: true,
   maxPayment: 10,
   storageDiskPrice: {
@@ -26,28 +31,34 @@ const bunny = {
   },
   transferDiscPrice: 0.01,
   calculateTotalPrice: function (storageValue, transferValue) {
-    this.totalPrice = this.isHdd
+    const sum = this.isHdd
       ? storageValue * this.storageDiskPrice.hdd +
         transferValue * this.transferDiscPrice
       : storageValue * this.storageDiskPrice.ssd +
         transferValue * this.transferDiscPrice;
+    this.totalPrice = sum < this.maxPayment ? sum : this.maxPayment;
   },
 };
 
 const scaleway = {
-  name: 'scaleway',
+  name: "scaleway",
   totalPrice: 0,
+  isPriceTheBest: true,
+  originalColor: "#7E57C2",
+  usageColor: function(baseColor) {
+    return this.isPriceTheBest ? this.originalColor : baseColor;
+  },
   isMulti: true,
   storageOption: {
     freeGB: 75,
     priceMulti: 0.06,
     priceSingle: 0.03,
-    get multi() {
+    multi: function(storageValue) {
       return storageValue <= this.freeGB
         ? 0
         : (storageValue - this.freeGB) * this.priceMulti;
     },
-    get single() {
+    single: function(storageValue) {
       return storageValue <= this.freeGB
         ? 0
         : (storageValue - this.freeGB) * this.priceSingle;
@@ -56,22 +67,27 @@ const scaleway = {
   transferOption: {
     freeGB: 75,
     price: 0.02,
-    get total() {
+    total: function(transferValue) {
       return transferValue <= this.freeGB
         ? 0
         : (transferValue - this.freeGB) * this.price;
     },
   },
-  calculateTotalPrice: function () {
+  calculateTotalPrice: function (storageValue, transferValue) {
     this.totalPrice = this.isMulti
-      ? this.storageOption.multi + this.transferOption.total
-      : this.storageOption.single + this.transferOption.total;
+      ? this.storageOption.multi(storageValue) + this.transferOption.total(transferValue)
+      : this.storageOption.single(storageValue) + this.transferOption.total(transferValue);
   },
 };
 
 const vultr = {
-  name: 'vultr',
+  name: "vultr",
   totalPrice: 0,
+  isPriceTheBest: false,
+  originalColor: "#206eff",
+  usageColor: function(baseColor) {
+    return this.isPriceTheBest ? this.originalColor : baseColor;
+  },
   minPayment: 5,
   storagePrice: 0.01,
   transferPrice: 0.01,

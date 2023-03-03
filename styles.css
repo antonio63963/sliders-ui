@@ -1,6 +1,6 @@
 :root {
   --bgColor: #040c18;
-  --orangeColor: #ff4820;
+  --orangeColor: #ff2020;
   --purpleColor: #7E57C2;
   --textColor: rgb(241, 241, 241);
   --blueTextColor: #81afdd;
@@ -58,7 +58,7 @@ main {
 }
 .graphChart {
   margin-right: 10px;
-  display: flex;
+  /* display: flex; */
   background-color: var(--grayDark);
   height: var(--chartHeight);
   min-width: 5px;
@@ -85,11 +85,11 @@ label {
   margin-left: 8px;
   color: var(--grayDark);
 }
-.bunnyChart {
+/* .bunnyChart {
   background-color: red;
   font-size: 10px;
-}
-.maxPaymentChart {
+} */
+/* .maxPaymentChart {
   background-color: var(--grayDark);
   height: 100%;
   width: 100%;
@@ -97,14 +97,14 @@ label {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-}
-.maxPaymentText {
+} */
+/* .maxPaymentText {
   opacity: 0;
   color: white;
   margin-right: 0;
   transition: opacity .5s ease 0.2s;
-}
-.visibleElement {
+} */
+/* .visibleElement {
   opacity: 1;
   margin-right: 10px;
-}
+} */

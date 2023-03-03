@@ -10,7 +10,6 @@ const blazeTotalPriceElem = document.querySelector(".blazeTotalPrice");
 const bunnyChart = document.querySelector(".bunnyChart");
 const bunnyTotalPriceElem = document.querySelector(".bunnyPrice");
 const bunnyOptionsElem = document.querySelector(".bunnyOptions");
-const bunnyMaxPaymentTextElem = document.querySelector(".maxPaymentText");
 
 const scalewayChartElem = document.querySelector(".scalewayChart");
 const scalewayTotalPriceElem = document.querySelector(".scalewayPrice");
@@ -22,9 +21,13 @@ console.log(vultrChart);
 let storageValue = 0;
 let transferValue = 0;
 const delta = 10; // it affects on maxPayment graph in style max-width: 100px!!!
+const baseColor = "#757575";
 
-function setChartWidth(chat, price, delta) {
-  chat.style.width = `${price * delta}px`;
+function setChartStyle(chat, price, delta, color) {
+  chat.style.cssText = `
+    width: ${price * delta}px;
+    background-color: ${color};
+  `;
 }
 
 function totalPriceContent(chatPrice, price) {
@@ -33,51 +36,46 @@ function totalPriceContent(chatPrice, price) {
 
 function getBestPrice(cloudsArr) {
   //count real total
-  cloudsArr
-    .forEach((cloud) => cloud.calculateTotalPrice(storageValue, transferValue));
-    cloudsArr.sort((a, b) =>
-      a.totalPrice < b.totalPrice ? -1 : b.totalPrice < a.totalPrice ? 1 : 0
-    );
+  cloudsArr.forEach((cloud) => {
+    cloud.isPriceTheBest = false;
+    cloud.calculateTotalPrice(storageValue, transferValue);
+  });
+  cloudsArr.sort((a, b) =>
+    a.totalPrice < b.totalPrice ? -1 : b.totalPrice < a.totalPrice ? 1 : 0
+  );
+  if (storageValue > 0 || transferValue > 0) {
+    cloudsArr[0].isPriceTheBest = true;
+  }
   console.log(cloudsArr);
 }
 
 function onBackblazeChange() {
-  backblaze.calculateTotalPrice(storageValue, transferValue);
-  setChartWidth(backblazeChart, backblaze.totalPrice, delta);
-  totalPriceContent(blazeTotalPriceElem, backblaze.compareTotalPriceWithMin);
-  if (backblaze.totalPrice < backblaze.minPayment) {
-    graphChartWrapper.classList.add("badPrice");
-  } else {
-    graphChartWrapper.classList.remove("badPrice");
-  }
+  const { totalPrice } = backblaze;
+  setChartStyle(
+    backblazeChart,
+    totalPrice,
+    delta,
+    backblaze.usageColor(baseColor)
+  );
+  totalPriceContent(blazeTotalPriceElem, totalPrice);
 }
 
 function onBunnyChange() {
-  bunny.calculateTotalPrice(storageValue, transferValue);
-  setChartWidth(bunnyChart, bunny.totalPrice, delta);
-  totalPriceContent(bunnyTotalPriceElem, bunny.totalPrice);
-
-  if (bunny.totalPrice > bunny.maxPayment) {
-    bunnyMaxPaymentTextElem.classList.add("visibleElement");
-    bunnyMaxPaymentTextElem.textContent = `max \$${bunny.maxPayment}`;
-    bunnyTotalPriceElem.classList.add("badPrice");
-  } else {
-    bunnyMaxPaymentTextElem.classList.remove("visibleElement");
-    bunnyMaxPaymentTextElem.textContent = "";
-    bunnyTotalPriceElem.classList.remove("badPrice");
-  }
+  const { totalPrice, usageColor, maxPayment } = bunny;
+  setChartStyle(bunnyChart, totalPrice, delta, bunny.usageColor(baseColor));
+  totalPriceContent(bunnyTotalPriceElem, totalPrice);
 }
 
 function onScalewayChange() {
-  scaleway.calculateTotalPrice();
-  setChartWidth(scalewayChartElem, scaleway.totalPrice, delta);
-  totalPriceContent(scalewayTotalPriceElem, scaleway.totalPrice);
+  const { totalPrice, usageColor } = scaleway;
+  setChartStyle(scalewayChartElem, totalPrice, delta, usageColor(baseColor));
+  totalPriceContent(scalewayTotalPriceElem, totalPrice);
 }
 
 function onVultr() {
-  vultr.calculateTotalPrice(storageValue, transferValue);
-  setChartWidth(vultrChart, vultr.totalPrice, delta);
-  totalPriceContent(vultrTotalPriceElem, vultr.totalPrice);
+  const { totalPrice, usageColor } = vultr;
+  setChartStyle(vultrChart, totalPrice, delta, usageColor(baseColor));
+  totalPriceContent(vultrTotalPriceElem, totalPrice);
 }
 // handlers
 function onStorageSlider(e) {
@@ -85,6 +83,7 @@ function onStorageSlider(e) {
   storageValue = sliderValue;
   storageValueElem.textContent = sliderValue;
 
+  getBestPrice([backblaze, bunny, scaleway, vultr]);
   onBackblazeChange();
   onBunnyChange();
   onScalewayChange();
@@ -108,10 +107,12 @@ sliderTransfer.addEventListener("input", onTransferSlider);
 
 bunnyOptionsElem.addEventListener("change", (e) => {
   bunny.isHdd = e.target.value === "hdd" ? true : false;
+  getBestPrice([backblaze, bunny, scaleway, vultr]);
   onBunnyChange();
 });
 
 scalewayOptionsElem.addEventListener("change", (e) => {
   scaleway.isMulti = e.target.value === "multi" ? true : false;
+  getBestPrice([backblaze, bunny, scaleway, vultr]);
   onScalewayChange();
 });
