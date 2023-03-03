@@ -34,7 +34,6 @@ function initCharts() {
 
 initCharts();
 
-
 // handlers
 window.addEventListener('resize', (e) => {
   initCharts();
