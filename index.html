@@ -15,39 +15,41 @@
   </head>
   <body>
     <main>
-      <div class="slidecontainer">
-        <h3>Storage: <span id="storageValue">0</span> GB</h3>
-        <input
-          type="range"
-          min="0"
-          max="1000"
-          value="0"
-          id="sliderStorage"
-          id="myRange"
-        />
-        <div class="sliderRange">
-          <span>0</span>
-          <span>1000</span>
+      <section class="slidersSection">
+        <div class="slidecontainer">
+          <h3>Storage: <span id="storageValue">0</span> GB</h3>
+          <input
+            type="range"
+            min="0"
+            max="1000"
+            value="0"
+            id="sliderStorage"
+            id="myRange"
+          />
+          <div class="sliderRange">
+            <span>0</span>
+            <span>1000</span>
+          </div>
         </div>
-      </div>
-
-      <!-- Transfer slider  -->
-      <div class="slidecontainer">
-        <h3>Transfer: <span id="transferValue">0</span> GB</h3>
-        <input
-          type="range"
-          min="0"
-          max="1000"
-          value="0"
-          id="sliderTransfer"
-          id="myRange"
-        />
-        <div class="sliderRange">
-          <span>0</span>
-          <span>1000</span>
+        
+        <!-- Transfer slider  -->
+        <div class="slidecontainer">
+          <h3>Transfer: <span id="transferValue">0</span> GB</h3>
+          <input
+            type="range"
+            min="0"
+            max="1000"
+            value="0"
+            id="sliderTransfer"
+            id="myRange"
+          />
+          <div class="sliderRange">
+            <span>0</span>
+            <span>1000</span>
+          </div>
         </div>
-      </div>
-
+        
+      </section>
       <section class="chatsSection">
         <!-- backblaze -->
         <div class="chatContainer">
@@ -94,11 +96,7 @@
             </div>
           </div>
           <div class="graphChartWrapper">
-            <div class="graphChart bunnyChart">
-              <!-- <div class="maxPaymentChart">
-                <span class="maxPaymentText"></span>
-              </div> -->
-            </div>
+            <div class="graphChart bunnyChart"></div>
             <span class="bunnyPrice">0$</span>
           </div>
         </div>
@@ -139,23 +137,24 @@
             <span class="scalewayPrice">0$</span>
           </div>
         </div>
-             <!-- vultr -->
-             <div class="chatContainer">
-              <div class="chatNameRow">
-                <span>vultr</span>
-                <div class="chatIconWrapper">
-                  <img src="./assets/vultr.svg" />
-                </div>
-              </div>
-              <div class="graphChartWrapper">
-                <div class="graphChart vultrChart"></div>
-                <span class="vultrTotalPrice">0$</span>
-              </div>
+        <!-- vultr -->
+        <div class="chatContainer">
+          <div class="chatNameRow">
+            <span>vultr</span>
+            <div class="chatIconWrapper">
+              <img src="./assets/vultr.svg" />
             </div>
+          </div>
+          <div class="graphChartWrapper">
+            <div class="graphChart vultrChart"></div>
+            <span class="vultrTotalPrice">0$</span>
+          </div>
+        </div>
       </section>
     </main>
 
     <script src="./cloudsData.js"></script>
+    <script src="./services/cloudsService.js"></script>
     <script src="./index.js"></script>
   </body>
 </html>

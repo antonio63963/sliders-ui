@@ -3,15 +3,19 @@ const backblaze = {
   totalPrice: 0,
   isPriceTheBest: false,
   originalColor: "#b61818",
-  usageColor: function(baseColor) {
+  usageColor: function (baseColor) {
     return this.isPriceTheBest ? this.originalColor : baseColor;
   },
   minPayment: 7,
   storagePrice: 0.005,
   transferPrice: 0.01,
   calculateTotalPrice: function (storageValue, transferValue) {
-   const sum = storageValue * this.storagePrice + transferValue * this.transferPrice;
-    this.totalPrice = sum < this.minPayment && (storageValue > 0 || transferValue > 0) ? this.minPayment : sum;
+    const sum =
+      storageValue * this.storagePrice + transferValue * this.transferPrice;
+    this.totalPrice =
+      sum < this.minPayment && (storageValue > 0 || transferValue > 0)
+        ? this.minPayment
+        : sum;
   },
 };
 
@@ -20,7 +24,7 @@ const bunny = {
   totalPrice: 0,
   isPriceTheBest: false,
   originalColor: "#ff4820",
-  usageColor: function(baseColor) {
+  usageColor: function (baseColor) {
     return this.isPriceTheBest ? this.originalColor : baseColor;
   },
   isHdd: true,
@@ -45,7 +49,7 @@ const scaleway = {
   totalPrice: 0,
   isPriceTheBest: true,
   originalColor: "#7E57C2",
-  usageColor: function(baseColor) {
+  usageColor: function (baseColor) {
     return this.isPriceTheBest ? this.originalColor : baseColor;
   },
   isMulti: true,
@@ -53,12 +57,12 @@ const scaleway = {
     freeGB: 75,
     priceMulti: 0.06,
     priceSingle: 0.03,
-    multi: function(storageValue) {
+    multi: function (storageValue) {
       return storageValue <= this.freeGB
         ? 0
         : (storageValue - this.freeGB) * this.priceMulti;
     },
-    single: function(storageValue) {
+    single: function (storageValue) {
       return storageValue <= this.freeGB
         ? 0
         : (storageValue - this.freeGB) * this.priceSingle;
@@ -67,7 +71,7 @@ const scaleway = {
   transferOption: {
     freeGB: 75,
     price: 0.02,
-    total: function(transferValue) {
+    total: function (transferValue) {
       return transferValue <= this.freeGB
         ? 0
         : (transferValue - this.freeGB) * this.price;
@@ -75,8 +79,10 @@ const scaleway = {
   },
   calculateTotalPrice: function (storageValue, transferValue) {
     this.totalPrice = this.isMulti
-      ? this.storageOption.multi(storageValue) + this.transferOption.total(transferValue)
-      : this.storageOption.single(storageValue) + this.transferOption.total(transferValue);
+      ? this.storageOption.multi(storageValue) +
+        this.transferOption.total(transferValue)
+      : this.storageOption.single(storageValue) +
+        this.transferOption.total(transferValue);
   },
 };
 
@@ -85,7 +91,7 @@ const vultr = {
   totalPrice: 0,
   isPriceTheBest: false,
   originalColor: "#206eff",
-  usageColor: function(baseColor) {
+  usageColor: function (baseColor) {
     return this.isPriceTheBest ? this.originalColor : baseColor;
   },
   minPayment: 5,
