@@ -1,18 +1,23 @@
 const backblaze = {
+  name: 'backblaze',
+  totalPrice: 0,
   minPayment: 7,
   storagePrice: 0.005,
   transferPrice: 0.01,
-  totalPrice: 0,
   calculateTotalPrice: function (storageValue, transferValue) {
     this.totalPrice =
       storageValue * this.storagePrice + transferValue * this.transferPrice;
   },
   get compareTotalPriceWithMin() {
-    return this.totalPrice < this.minPayment ? this.minPayment : this.totalPrice;
+    return this.totalPrice < this.minPayment
+      ? this.minPayment
+      : this.totalPrice;
   },
 };
 
 const bunny = {
+  name: 'bunny',
+  totalPrice: 0,
   isHdd: true,
   maxPayment: 10,
   storageDiskPrice: {
@@ -20,7 +25,6 @@ const bunny = {
     ssd: 0.02,
   },
   transferDiscPrice: 0.01,
-  totalPrice: 0,
   calculateTotalPrice: function (storageValue, transferValue) {
     this.totalPrice = this.isHdd
       ? storageValue * this.storageDiskPrice.hdd +
@@ -31,8 +35,9 @@ const bunny = {
 };
 
 const scaleway = {
-  isMulti: true,
+  name: 'scaleway',
   totalPrice: 0,
+  isMulti: true,
   storageOption: {
     freeGB: 75,
     priceMulti: 0.06,
@@ -65,10 +70,11 @@ const scaleway = {
 };
 
 const vultr = {
+  name: 'vultr',
+  totalPrice: 0,
   minPayment: 5,
   storagePrice: 0.01,
   transferPrice: 0.01,
-  totalPrice: 0,
   calculateTotalPrice: function (storageValue, transferValue) {
     this.totalPrice =
       storageValue * this.storagePrice + transferValue * this.transferPrice;

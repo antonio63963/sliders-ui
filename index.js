@@ -31,6 +31,16 @@ function totalPriceContent(chatPrice, price) {
   chatPrice.textContent = `${price.toFixed(2)}$`;
 }
 
+function getBestPrice(cloudsArr) {
+  //count real total
+  cloudsArr
+    .forEach((cloud) => cloud.calculateTotalPrice(storageValue, transferValue));
+    cloudsArr.sort((a, b) =>
+      a.totalPrice < b.totalPrice ? -1 : b.totalPrice < a.totalPrice ? 1 : 0
+    );
+  console.log(cloudsArr);
+}
+
 function onBackblazeChange() {
   backblaze.calculateTotalPrice(storageValue, transferValue);
   setChartWidth(backblazeChart, backblaze.totalPrice, delta);
@@ -55,8 +65,8 @@ function onBunnyChange() {
     bunnyMaxPaymentTextElem.classList.remove("visibleElement");
     bunnyMaxPaymentTextElem.textContent = "";
     bunnyTotalPriceElem.classList.remove("badPrice");
-  };
-};
+  }
+}
 
 function onScalewayChange() {
   scaleway.calculateTotalPrice();
@@ -69,7 +79,6 @@ function onVultr() {
   setChartWidth(vultrChart, vultr.totalPrice, delta);
   totalPriceContent(vultrTotalPriceElem, vultr.totalPrice);
 }
-console.log(vultr);
 // handlers
 function onStorageSlider(e) {
   let sliderValue = e.target.value;
@@ -86,7 +95,7 @@ function onTransferSlider(e) {
   let data = e.target.value;
   transferValue = data;
   transferValueElem.textContent = data;
-
+  getBestPrice([backblaze, bunny, scaleway, vultr]);
   onBackblazeChange();
   onBunnyChange();
   onScalewayChange();
