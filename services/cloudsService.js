@@ -13,7 +13,7 @@ function getBestPrice(...cloudsArr) {
 
 function setChartStyle(chat, price, delta, color) {
   chat.style.cssText = `
-    width: ${price * (price > 45 ? 3 : 5)}px;
+    ${window.innerWidth <= 715 ? 'height' : 'width'}: ${price * (price > 45 ? 3 : delta)}px;
     background-color: ${color};
   `;
 };

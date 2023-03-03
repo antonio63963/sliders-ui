@@ -22,6 +22,7 @@ let storageValue = 0;
 let transferValue = 0;
 const delta = 10;
 const baseColor = "#757575";
+const bowserWidth = window.innerWidth;
 
 function initCharts() {
   getBestPrice(backblaze, bunny, scaleway, vultr);
@@ -33,7 +34,12 @@ function initCharts() {
 
 initCharts();
 
+
 // handlers
+window.addEventListener('resize', (e) => {
+  initCharts();
+}); // for flexible resize charts values on breakpoint
+
 function onStorageSlider(e) {
   let sliderValue = e.target.value;
   storageValue = sliderValue;

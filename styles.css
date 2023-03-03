@@ -18,6 +18,13 @@
 }
 main {
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  min-height: 100vh;
+
 }
 .slidersSection {
   display: flex;
@@ -50,12 +57,18 @@ main {
   margin: 20px;
 }
 
-.chatNameRow {
+.chartNameRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 200px;
 }
+
+.chatName {
+  display: flex;
+  flex-direction: row;
+}
+
 .chatIconWrapper {
   display: flex;
   align-items: center;
@@ -65,6 +78,7 @@ main {
 .graphChartWrapper {
   display: flex;
   align-items: center;
+  width: 250px;
 }
 .graphChart {
   margin-right: 10px;
@@ -72,6 +86,7 @@ main {
   background-color: var(--grayDark);
   height: var(--chartHeight);
   min-width: 5px;
+  min-height: 5px;
   transition: all .5s ease;
 }
 .badPrice {
@@ -85,14 +100,56 @@ main {
 }
 .chatNameOptions {
   margin: 10px 0 10px 0;
-  display: flex
+  display: flex;
+  width: 100px;
+  justify-content: space-between;
 }
-input[value="ssd"], input[value="single"] {
+/* input[value="ssd"], input[value="single"] {
   margin-left: 20px;
-}
+} */
 label {
   font-size: 10px;
-  margin-left: 8px;
+  /* margin-left: 8px; */
   color: var(--grayDark);
 }
 
+@media screen and (max-width: 715px) {
+  main {
+    flex-direction: column-reverse;
+  }
+  .chatContainer {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  .chatsSection {
+    flex-direction: row;
+  }
+  .chartNameRow {
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: flex-end;
+    width: 80px;
+    height: 130px;
+    margin-top: 15px;
+  }
+  .chartName {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .graphChartWrapper {
+    flex-direction: column-reverse;
+    align-items: center;
+    height: 250px;
+    width: auto;
+  }
+  .chatNameOptions {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .graphChart {
+    width: var(--chartHeight);
+    min-height: 5px;
+  }
+}
