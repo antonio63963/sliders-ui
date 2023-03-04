@@ -15,7 +15,7 @@
   </head>
   <body>
     <main>
-      <section class="slidersSection">
+      <div class="slidersSection">
         <div class="slidecontainer">
           <h3>Storage: <span id="storageValue">0</span> GB</h3>
           <input
@@ -24,7 +24,6 @@
             max="1000"
             value="0"
             id="sliderStorage"
-            id="myRange"
           />
           <div class="sliderRange">
             <span>0</span>
@@ -41,7 +40,6 @@
             max="1000"
             value="0"
             id="sliderTransfer"
-            id="myRange"
           />
           <div class="sliderRange">
             <span>0</span>
@@ -49,14 +47,14 @@
           </div>
         </div>
         
-      </section>
-      <section class="chatsSection">
+      </div>
+      <div class="chatsSection">
         <!-- backblaze -->
         <div class="chatContainer">
           <div class="chartNameRow">
             <span>backblaze</span>
             <div class="chatIconWrapper">
-              <img src="./assets/backblaze.svg" />
+              <img src="./assets/backblaze.svg" alt="backblaze.com"/>
             </div>
           </div>
           <div class="graphChartWrapper">
@@ -142,7 +140,7 @@
           <div class="chartNameRow">
             <span>vultr</span>
             <div class="chatIconWrapper">
-              <img src="./assets/vultr.svg" />
+              <img src="./assets/vultr.svg" alt="vultr.com"/>
             </div>
           </div>
           <div class="graphChartWrapper">
@@ -150,7 +148,7 @@
             <span class="vultrTotalPrice">0$</span>
           </div>
         </div>
-      </section>
+      </div>
     </main>
 
     <script src="./cloudsData.js"></script>
