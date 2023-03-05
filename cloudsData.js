@@ -1,11 +1,13 @@
+function usageColor(baseColor) {
+  return this.isPriceTheBest ? this.originalColor : baseColor;
+};
+
 const backblaze = {
   name: "backblaze",
   totalPrice: 0,
   isPriceTheBest: false,
   originalColor: "#b61818",
-  usageColor: function (baseColor) {
-    return this.isPriceTheBest ? this.originalColor : baseColor;
-  },
+  usageColor: usageColor,
   minPayment: 7,
   storagePrice: 0.005,
   transferPrice: 0.01,
@@ -24,9 +26,7 @@ const bunny = {
   totalPrice: 0,
   isPriceTheBest: false,
   originalColor: "#ff4820",
-  usageColor: function (baseColor) {
-    return this.isPriceTheBest ? this.originalColor : baseColor;
-  },
+  usageColor: usageColor,
   isHdd: true,
   maxPayment: 10,
   storageDiskPrice: {
@@ -49,9 +49,7 @@ const scaleway = {
   totalPrice: 0,
   isPriceTheBest: true,
   originalColor: "#7E57C2",
-  usageColor: function (baseColor) {
-    return this.isPriceTheBest ? this.originalColor : baseColor;
-  },
+  usageColor: usageColor,
   isMulti: true,
   storageOption: {
     freeGB: 75,
@@ -91,9 +89,7 @@ const vultr = {
   totalPrice: 0,
   isPriceTheBest: false,
   originalColor: "#206eff",
-  usageColor: function (baseColor) {
-    return this.isPriceTheBest ? this.originalColor : baseColor;
-  },
+  usageColor: usageColor,
   minPayment: 5,
   storagePrice: 0.01,
   transferPrice: 0.01,
