@@ -18,18 +18,19 @@ const scalewayOptionsElem = document.querySelector(".scalewayOptions");
 const vultrChartElem = document.querySelector(".vultrChart");
 const vultrTotalPriceElem = document.querySelector(".vultrTotalPrice");
 
-let storageValue = 0;
-let transferValue = 0;
-const delta = 10;
-const baseColor = "#757575";
-const bowserWidth = window.innerWidth;
+const chartConfig = {
+  storageValue: 0,
+  transferValue: 0,
+  baseColor: "#757575",
+  delta: 10
+}
 
 function initCharts() {
-  getBestPrice(backblaze, bunny, scaleway, vultr);
-  onCloudChange(backblazeChartElem, blazeTotalPriceElem, backblaze, delta);
-  onCloudChange(bunnyChartElem, bunnyTotalPriceElem, bunny, delta);
-  onCloudChange(scalewayChartElem, scalewayTotalPriceElem, scaleway, delta);
-  onCloudChange(vultrChartElem, vultrTotalPriceElem, vultr, delta);
+  getBestPrice(chartConfig, backblaze, bunny, scaleway, vultr);
+  onCloudChange(backblazeChartElem, blazeTotalPriceElem, backblaze, chartConfig);
+  onCloudChange(bunnyChartElem, bunnyTotalPriceElem, bunny, chartConfig);
+  onCloudChange(scalewayChartElem, scalewayTotalPriceElem, scaleway, chartConfig);
+  onCloudChange(vultrChartElem, vultrTotalPriceElem, vultr, chartConfig);
 };
 
 initCharts();
@@ -41,14 +42,14 @@ window.addEventListener('resize', (e) => {
 
 function onStorageSlider(e) {
   let sliderValue = e.target.value;
-  storageValue = sliderValue;
+  chartConfig.storageValue = sliderValue;
   storageValueElem.textContent = sliderValue;
   initCharts();
 };
 
 function onTransferSlider(e) {
   let data = e.target.value;
-  transferValue = data;
+  chartConfig.transferValue = data;
   transferValueElem.textContent = data;
   initCharts();
 };
